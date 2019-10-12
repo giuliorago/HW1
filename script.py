@@ -415,6 +415,11 @@ print(tot)
 
 # Exercise 30 - Sets - Symmetric Difference
 
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+a,b = [set(input().split()) for _ in range(4)][1::2]
+print(*sorted(a^b, key=int), sep='\n')
+
+
 # Exercise 31 - Sets - Set .add()
 
 # Enter your code here. Read input from STDIN. Print output to STDOUT
@@ -586,6 +591,26 @@ print(tot,end = "")
 
 
 # Exercise 42 - Collections - DefaultDict Tutorial
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import defaultdict
+d = defaultdict(list)
+l=[]
+
+n, m = map(int,input().split())
+
+for i in range(n):
+    d[input()].append(i+1) 
+
+for i in range(m):
+    l=l+[input()]  
+
+for i in l: 
+    if (i in d):
+        print (" ".join( map(str,d[i]) ))
+    else:
+        print (-1)
+
 
 
 # Exercise 43 - Collections - Collections.namedtuple()
@@ -848,23 +873,128 @@ regex_pattern = r"%s%s%s%s$" % (thousand, hundred, ten, digit)
 
 # Exercise 56 - Regex - Detect Floating Point Number
 
+#The difficult is to understand all the possibility, like all the regex exercise
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+
+n = int(input())
+for _ in range(n):
+    print(bool(re.match(r'^[-+]?[0-9]*\.[0-9]+$', input())))
+
+
 # Exercise 57 - Regex - Re.split()
 
+regex_pattern = r"[,.]" 
+
+
 # Exercise 58 - Regex - Group(), Groups() & Groupdict()
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+
+s = input()
+f = re.search(r"([a-zA-Z0-9])\1+",s)
+if(f):
+    print(f.group(1))
+else:
+    print(-1)
+
 
 # Exercise 59 - Regex - Re.findall() & Re.finditer()
 
 # Exercise 60 - Regex - Re.start() & Re.end()
 
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import re
+s = input()
+v = input()
+for i,x in enumerate(s):
+    if re.match(v,s[i:]):
+        print((i,i+len(v)-1))
+        
+if re.search(v, s)==None:
+    print((-1,-1))
+
+
 # Exercise 61 - Regex - Regex Substitution
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import re
+n = int(input())
+for _ in range(n):
+        s = input()
+        s = re.sub(r" \&\&(?= )", " and", s)
+        s = re.sub(r" \|\|(?= )", ' or', s)
+        print(s)
+
 
 # Exercise 62 - Regex - Validating Roman Numerals
 
+
+m = 'M{0,3}'
+c = '(C[MD]|D?C{0,3})'
+d = '(X[CL]|L?X{0,3})'
+u = '(I[VX]|V?I{0,3})'
+
+regex_pattern = r"%s%s%s%s$" % (m, c, d, u)
+
+
+
+
 # Exercise 63 - Regex - Validating phone numbers
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+
+import string
+
+n = int(input())
+l = ['9','8','7']
+for _ in range(n):
+    m = input()
+    if((m[0] in l) &  (len(m) == 10) & (m.isnumeric())):
+        print("YES")
+    else:
+        print("NO")
+
 
 # Exercise 64 - Regex - Validating and Parsing Email Addresses
 
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import re
+n = int(input())
+for _ in range(n):
+    x, y = input().split(' ')
+    m = re.match(r'<[A-Za-z](\w|-|\.|_)+@[A-Za-z]+\.[A-Za-z]{1,3}>', y)
+    if m:
+        print(x,y)
+
+
 # Exercise 65 - Regex - Hex Color Code
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+
+
+n=int(input())
+
+for _ in range(n):
+    s=input()
+
+    x=s.split()
+
+    if len(x)>1  and  '{' not in x:
+        x=re.findall(r'#[a-fA-F0-9]{3,6}',s)
+        [print(i) for  i in x]
+
 
 # Exercise 66 - Regex - HTML Parser - Part 1
 
