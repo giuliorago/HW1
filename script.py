@@ -998,17 +998,160 @@ for _ in range(n):
 
 # Exercise 66 - Regex - HTML Parser - Part 1
 
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+from html.parser import HTMLParser
+
+class MyHTMLParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        print("Start :", tag)
+        if len(attrs) > 0:
+            for elem in attrs:
+                print("-> {} > {}".format(elem[0], elem[1]))
+    def handle_endtag(self, tag):
+        print("End   :", tag)
+    def handle_startendtag(self, tag, attrs):
+        print("Empty :", tag)
+        if len(attrs) > 0:
+            for elem in attrs:
+                print("-> {} > {}".format(elem[0], elem[1]))
+
+N = int(input())
+parser = MyHTMLParser()
+for i in range(N):
+    line = input()
+    parser.feed(line)
+
+
+
 # Exercise 67 - Regex - HTML Parser - Part 2
+
+from html.parser import HTMLParser
+
+class MyHTMLParser(HTMLParser):
+    def handle_comment(self, data):
+        l = str(data).split('\n')
+        if(len(l) == 1):
+            print('>>> Single-line Comment')
+            print(l[0])
+        elif(len(l) > 1):
+            print('>>> Multi-line Comment')
+            for elem in l:
+                print(elem)
+    def handle_data(self, data):
+        if(len(data)>1):
+            print (">>> Data")
+            print(str(data))
+  
+html = ""       
+for i in range(int(input())):
+    html += input().rstrip()
+    html += '\n'
+    
+parser = MyHTMLParser()
+parser.feed(html)
+parser.close()
+
 
 # Exercise 68 - Regex - Detect HTML Tags, Attributes and Attribute Values
 
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+
+from html.parser import HTMLParser
+
+class MyHTMLParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        print(tag)
+        if len(attrs) > 0:
+            for elem in attrs:
+                print("-> {} > {}".format(elem[0], elem[1]))
+    def handle_startendtag(self, tag, attrs):
+        print(tag)
+        if len(attrs) > 0:
+            for elem in attrs:
+                print("-> {} > {}".format(elem[0], elem[1]))
+
+N = int(input())
+parser = MyHTMLParser()  
+html = ""
+for i in range(N):
+    html += input()
+parser.feed(html)
+
+
+
+
 # Exercise 69 - Regex - Validating UID
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import re
+T = int(input())
+for i in range(T):
+    uid = ''.join(sorted(input()))
+    valid_upper = bool(re.match(r'.*([A-Z]{2,}).*', uid))
+    valid_digits = bool(re.match(r'.*([0-9]{3,}).*', uid))
+    valid_rep = not bool(re.match(r'.*(.).*\1', uid))
+    valid_all = bool(re.match(r'^[0-9a-zA-Z]{10}$', uid))
+    if valid_upper and valid_digits and valid_rep and valid_all:
+        print('Valid')
+    else:
+        print('Invalid')
+
+
+
 
 # Exercise 70 - Regex - Validating Credit Card Numbers
 
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import re
+N = int(input())
+
+for i in range(N):
+    s = input()
+    # match rules sep
+    valid_all = bool(re.match('^([456][0-9]{3}[0-9]{4}[0-9]{4}[0-9]{4})|([456][0-9]{3}-[0-9]{4}-[0-9]{4}-[0-9]{4})$', s))
+    a = ''.join(s.split('-'))
+    valid_rep = not re.search(r'(.)(-?\1){3}', a)
+    if(valid_rep and valid_all):
+        print('Valid')
+    else:
+        print('Invalid')
+
+
+
+
 # Exercise 71 - Regex - Validating Postal Codes
 
+
 # Exercise 72 - Regex - Matrix Script
+
+import math
+import os
+import random
+import re
+import sys
+import re
+
+
+
+first_multiple_input = input().rstrip().split()
+n = int(first_multiple_input[0])
+m = int(first_multiple_input[1])
+mat_t = [""]*m                 # create transopsed matrix
+
+for _ in range(n):
+    matrix_item = input()
+    for i in range(m):
+        mat_t[i] += matrix_item[i]
+
+script = ''.join(mat_t)        # script to decode
+
+decoded = re.sub('(?<=[a-zA-Z0-9])([ !@#$%&]+)(?=[a-zA-Z0-9])', ' ', script)
+print(decoded)
+
 
 # Exercise 73 - Xml - XML 1 - Find the Score
 
